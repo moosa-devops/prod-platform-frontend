@@ -23,7 +23,7 @@ jobs:
         run: |
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY }}/prod-platform-frontend
 
-      -name: Build and Push Frontend Docker Image
+      - name: Build, tag, and push Docker image
         run: |
           TAG=${git rev-parse --short HEAD}
           docker build -t frontend:$TAG -f Dockerfile .
